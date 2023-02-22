@@ -56,7 +56,7 @@
       $('#submit').on('click', function() {
         var title = $('#title').val();
         var id = $('#id').val();
-        var HTMLstring = "<p data-id=" + id + ">"+ title +"</p>";
+        var HTMLstring = "<p style='color: blue' data-id=" + id + ">"+ title +"</p>";
 
         $('#summernote').summernote('pasteHTML', HTMLstring);
         $('#myModal').modal('hide');
@@ -75,7 +75,8 @@
           ["table", ["table"]],
           ["insert", ["link", "picture", "video"]],
           ["view", ["fullscreen", "codeview", "help"]],
-          ['helloButton', ['helloButton']]
+          ['helloButton', ['helloButton']],
+          ['custom', ['examplePlugin']]
         ],
         buttons: {
           helloButton: HelloButton

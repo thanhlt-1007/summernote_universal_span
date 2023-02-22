@@ -3,3 +3,6 @@
 
 //= require summernote-linkEditor/summernote-linkEditor
 //= require summernote-linkEditor/lang/ja-JP
+
+//= require summernote-example-plugin/summernote-example-plugin
+//= require summernote-example-plugin/lang/ja-JP
