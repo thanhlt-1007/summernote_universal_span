@@ -4,6 +4,18 @@
   $(document).ready(function() {
       $("#summernote").summernote({
         lang: "ja-JP",
+        toolbar: [
+          // Reference: https://github.com/summernote/summernote/blob/v0.8.18/src/js/base/module/Buttons.js
+          // ['tollbar', ['button1', 'button2']]
+          ["style", ["style"]],
+          ["font", ["bold", "underline", "clear"]],
+          ["fontname", ["fontname"]],
+          ["color", ["color"]],
+          ["para", ["ul", "ol", "paragraph"]],
+          ["table", ["table"]],
+          ["insert", ["link", "picture", "video"]],
+          ["view", ["fullscreen", "codeview", "help"]]
+        ],
         popover: {
           image: [
             ["custom", ["imageAttributes"]],
