@@ -21,9 +21,13 @@
   // lang
   $.extend(true,$.summernote.lang, {
     examplePlugin: {
-      tooltip: '関連記事',
+      tooltip: 'Example Plugin',
       dialog: {
         title: 'Example Plugin'
+      },
+      label: {
+        title: 'Title',
+        article: 'Article'
       },
       button: {
         ok: 'OK'
@@ -112,15 +116,30 @@
 
         var $container = options.dialogsInBody ? $(document.body) : $editor;
 
-        var body = '<div class="form-group">' +
-                   '</div>';
+        var title = lang.examplePlugin.dialog.title;
+
+        var body = '<form action="/action_page.php">' +
+                   '  <div class="form-group">' +
+                   '    <label for="title">' +
+                          lang.examplePlugin.label.title +
+                   '    </label>' +
+                   '    <input type="text" class="form-control" id="js-note-examplePlugin-title" placeholder="" name="title">' +
+                   '  </div>' +
+                   '  <div class="form-group">' +
+                   '    <label for="article">' +
+                          lang.examplePlugin.label.article +
+                   '    </label>' +
+                   '    <input type="text" class="form-control" id="js-note-examplePlugin-article" placeholder="" name="article">' +
+                   '  </div>' +
+                   '</form>';
+
         var footer = '<button href="#" class="btn btn-primary note-examplePlugin-btn">' + lang.examplePlugin.button.ok + '</button>';
 
         this.$dialog = ui.dialog({
 
           // Set the title for the Dialog. Note: We don't need to build the markup for the Modal
           // Header, we only need to set the Title.
-          title: lang.examplePlugin.dialog.title,
+          title: title,
 
           // Set the Body of the Dialog.
           body: body,
