@@ -168,6 +168,7 @@
       };
       this.show = function () {
         var $img    = $($editable.data('target'));
+        debugger
         var imgInfo = {
           imgDom:  $img,
           title:   $img.attr('title'),
@@ -251,6 +252,7 @@
           }
           ui.onDialogShown(self.$dialog, function () {
             context.triggerEvent('dialog.shown');
+
             $imageInput.replaceWith(
               $imageInput.clone().on('change', function () {
                 var callbacks = options.callbacks;
@@ -265,6 +267,7 @@
                 }
               }).val('')
             );
+
             $editBtn.click( function (e) {
               e.preventDefault();
               deferred.resolve({
@@ -287,6 +290,7 @@
                 context.triggerEvent('change', $editable.html());
               });
             });
+
             $imageTitle.val(imgInfo.title);
             $imageSrc.val(imgInfo.src);
             $imageAlt.val(imgInfo.alt);
@@ -295,6 +299,7 @@
             $imageClass.val(imgInfo.class);
             $imageStyle.val(imgInfo.style);
             $imageRole.val(imgInfo.role);
+
             self.bindEnterKey($editBtn);
             self.bindLabels();
           });

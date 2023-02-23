@@ -38,7 +38,7 @@
   // options
   $.extend($.summernote.options, {
     examplePlugin: {
-      icon: '<i class="note-icon-pencil"/>'
+      icon: '<b>cf.</b>'
     }
   });
 
@@ -123,17 +123,19 @@
                    '    <label for="title">' +
                           lang.examplePlugin.label.title +
                    '    </label>' +
-                   '    <input type="text" class="form-control" id="js-note-examplePlugin-title" placeholder="" name="title">' +
+                   '    <input type="text" class="form-control js-note-examplePlugin-title" placeholder="" name="title">' +
                    '  </div>' +
                    '  <div class="form-group">' +
                    '    <label for="article">' +
                           lang.examplePlugin.label.article +
                    '    </label>' +
-                   '    <input type="text" class="form-control" id="js-note-examplePlugin-article" placeholder="" name="article">' +
+                   '    <input type="text" class="form-control js-note-examplePlugin-article" placeholder="" name="article">' +
                    '  </div>' +
                    '</form>';
 
-        var footer = '<button href="#" class="btn btn-primary note-examplePlugin-btn">' + lang.examplePlugin.button.ok + '</button>';
+        var footer = '<button href="#" class="btn btn-primary js-note-examplePlugin-btn-ok">' +
+                       lang.examplePlugin.button.ok +
+                     '</button>';
 
         this.$dialog = ui.dialog({
 
@@ -178,38 +180,66 @@
       this.show = function () {
         console.log('examplePlugin:show');
 
-        var $img = $($editable.data('target'));
-        var editorInfo = {
-
+        // TODO
+        // get selectedarticleLink
+        var selectedarticleLink = {
+          title: "selected title",
+          article: "selected article"
+        }
+        var articleLinkInfo = {
+          title: selectedarticleLink.title,
+          article: selectedarticleLink.article
         };
-        this.showexamplePluginDialog(editorInfo).then(function (editorInfo) {
+
+        this.showexamplePluginDialog(articleLinkInfo).then(function (articleLinkInfo) {
           ui.hideDialog(self.$dialog);
           $note.val(context.invoke('code'));
           $note.change();
         });
       };
 
-      this.showexamplePluginDialog = function(editorInfo) {
+      this.showexamplePluginDialog = function(articleLinkInfo) {
         console.log('examplePlugin:showexamplePluginDialog');
 
         return $.Deferred(function (deferred) {
-          var $editBtn = self.$dialog.find('.note-examplePlugin-btn');
+
+          var $title = self.$dialog.find('.js-note-examplePlugin-title');
+          var $article = self.$dialog.find('.js-note-examplePlugin-article');
+          var $btnOK = self.$dialog.find('.js-note-examplePlugin-btn-ok');
+
+          $title.val(articleLinkInfo.title);
+          $article.val(articleLinkInfo.article);
+          // $btnOK.attr('disabled', 'disabled');
 
           ui.onDialogShown(self.$dialog, function () {
+            console.log('ui.onDialogShown');
+
             context.triggerEvent('dialog.shown');
-            $editBtn.click(function (e) {
+
+            $btnOK.click(function (e) {
+              console.log('$btnOK.click');
+
               e.preventDefault();
               deferred.resolve({
+                title: "showexamplePluginDialog title",
+                article: "showexamplePluginDialog article"
+              }).then(function (img) {
+                // context.triggerEvent('change', $editable.html());
 
+                context.triggerEvent('change', $editable.html());
               });
             });
-            self.bindEnterKey($editBtn);
+            self.bindEnterKey($btnOK);
             self.bindLabels();
           });
+
           ui.onDialogHidden(self.$dialog, function () {
-            $editBtn.off('click');
+            console.log('ui.onDialogHidden');
+
+            $btnOK.off('click');
             if (deferred.state() === 'pending') deferred.reject();
           });
+
           ui.showDialog(self.$dialog);
         });
       };
