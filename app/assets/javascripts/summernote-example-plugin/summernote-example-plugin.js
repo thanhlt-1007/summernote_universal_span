@@ -18,41 +18,41 @@
     factory(window.jQuery);
   }
 }(function ($) {
-  $.extend(true, $.summernote.lang, {
-    'en-US': {
-      examplePlugin: {
-        exampleText: 'Example Text',
-        dialogTitle: 'Example Plugin',
-        okButton: 'OK'
-      }
-    }
+  // lang
+  $.extend(true,$.summernote.lang, {
+
   });
+
+  // options
   $.extend($.summernote.options, {
-    examplePlugin: {
-      icon: '<b>cf.</b>',
-      tooltip: 'Example Plugin Tooltip'
-    }
+
   });
+
   $.extend($.summernote.plugins, {
     'examplePlugin': function (context) {
-			var self = this,
-				ui = $.summernote.ui,
-				$note = context.layoutInfo.note,
-				$editor = context.layoutInfo.editor,
-				$editable = context.layoutInfo.editable,
-				$toolbar = context.layoutInfo.toolbar,
-				options = context.options,
-				lang = options.langInfo;
+      context.memo('button.examplePlugin', function() {
+        console.log('examplePlugin:button.examplePlugin');
+      });
 
-			context.memo('button.examplePlugin', function() {
-				var button = ui.button({
-					contents: options.examplePlugin.icon,
-					tooltip: lang.examplePlugin.tooltip,
-					codeviewKeepButton: true,
-				});
+      this.initialize = function () {
+        console.log('examplePlugin:initialize');
+      };
 
-				return button.render();
-			});
+      this.destroy = function () {
+        console.log('examplePlugin:destroy');
+      };
+
+      this.bindEnterKey = function ($input,$btn) {
+        console.log('examplePlugin:bindEnterKey');
+      };
+
+      this.bindLabels = function ($input,$btn) {
+        console.log('examplePlugin:bindLabels');
+      };
+
+      this.show = function () {
+        console.log('examplePlugin:show');
+      };
     }
   });
 }));
