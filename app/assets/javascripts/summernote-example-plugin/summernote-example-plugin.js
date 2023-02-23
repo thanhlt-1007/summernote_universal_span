@@ -21,17 +21,20 @@
   // lang
   $.extend(true,$.summernote.lang, {
     examplePlugin: {
-      exampleText: 'Example Text',
-      dialogTitle: 'Example Plugin',
-      okButton: 'OK'
+      tooltip: '関連記事',
+      dialog: {
+        title: 'Example Plugin'
+      },
+      button: {
+        ok: 'OK'
+      }
     }
   });
 
   // options
   $.extend($.summernote.options, {
     examplePlugin: {
-      icon: '<i class="note-icon-pencil"/>',
-      tooltip: 'Example Plugin Tooltip'
+      icon: '<i class="note-icon-pencil"/>'
     }
   });
 
@@ -111,13 +114,13 @@
 
         var body = '<div class="form-group">' +
                    '</div>';
-        var footer = '<button href="#" class="btn btn-primary note-examplePlugin-btn">' + lang.examplePlugin.okButton + '</button>';
+        var footer = '<button href="#" class="btn btn-primary note-examplePlugin-btn">' + lang.examplePlugin.button.ok + '</button>';
 
         this.$dialog = ui.dialog({
 
           // Set the title for the Dialog. Note: We don't need to build the markup for the Modal
           // Header, we only need to set the Title.
-          title: lang.examplePlugin.dialogTitle,
+          title: lang.examplePlugin.dialog.title,
 
           // Set the Body of the Dialog.
           body: body,
